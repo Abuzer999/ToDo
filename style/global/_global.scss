@@ -1,0 +1,68 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background: #1A1A1A;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Inter';
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  line-height: 1.5;
+  min-width: 320px;
+  position: relative;
+  overflow: overlay;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+button {
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+}
+
+input {
+  outline: none;
+  background: none;
+  border: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+::selection {
+  background: rgb(82, 82, 82); 
+  color: #1E6F9F;
+}
+
+:root {
+  scroll-behavior: smooth;
+}
