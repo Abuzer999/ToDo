@@ -14,7 +14,6 @@ const dataGet = async () => {
         const response = await axios.get(api);
         const data = await response.data;
         empty(data)
-        console.log(data);
         addTask(data);
     } catch(error) {
         console.warn('error:', error);
@@ -30,7 +29,6 @@ const dataPost = async () => {
         await dataGet();
         const taskId = response.data.id;
         animateTask(taskId);
-        console.log('задача добавлена:')
     } catch(error) {
         console.warn('error:', error);
     }
@@ -42,7 +40,6 @@ const deleteData = async (id) => {
         const task = document.querySelector(`.todo__task[id="${id}"]`);
         delTask(task);
         await dataGet(); 
-        console.log('задача удалена:')
     } catch(error) {
         console.warn('error:', error);
     }
@@ -55,7 +52,6 @@ const patchData = async (id, doneStatus) => {
         await dataGet();
         const task = document.querySelector(`.todo__task[id="${id}"]`);
         checkAni(task, doneStatus);
-        console.log('Задача обновлена:');
     } catch(error) {
         console.warn('error:', error);
     }
@@ -65,7 +61,6 @@ const updateText = async (id, newText) => {
     try {
         await axios.put(`${api}/${id}`, { text: newText });
         await dataGet();
-        console.log('Текст задачи обновлен:');
     } catch(error) {
         console.warn('error', error);
     }
