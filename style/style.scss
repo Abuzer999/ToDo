@@ -186,7 +186,7 @@
     &__edit {
         display: none;
         width: 35px;
-        height: 53px;
+        height: clamp(2.5rem, calc(1.895rem + 3.02vw), 3.313rem);
         margin-right: 5px;
     }
 

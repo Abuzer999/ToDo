@@ -229,7 +229,7 @@ input::-webkit-inner-spin-button {
 .todo__edit {
   display: none;
   width: 35px;
-  height: 53px;
+  height: clamp(2.5rem, 1.895rem + 3.02vw, 3.313rem);
   margin-right: 5px;
 }
 .todo__del {
