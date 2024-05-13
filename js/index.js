@@ -6,6 +6,8 @@ const taskAll = document.querySelector('.todo__all');
 const completed = document.querySelector('.todo__completed')
 const nothing = document.querySelector('.todo__nothing');
 const dones = document.querySelector('.todo__dones');
+let isLocked = false;
+
 
 const api = 'https://660c23b83a0766e85dbd8283.mockapi.io/tasks';
 
@@ -15,14 +17,18 @@ const dataGet = async () => {
         const data = await response.data;
         empty(data)
         addTask(data);
+        isTaskDeleted = false;
+        isTaskEdited = false;
     } catch(error) {
         console.warn('error:', error);
     }
 }
 
 const dataPost = async () => {
+    if(isLocked) return;
     const input = inp.value;
     if (!inp.value || inp.value.trim() === '') return;
+    locked();
 
     try {
         const response = await axios.post(api, {text: input, done: false});
@@ -125,12 +131,15 @@ form.addEventListener('click', (e) => {
 })
 
 tasks.addEventListener('click', (e) => {
+    if (isLocked) return;
+
     const taskElement = e.target.closest('.todo__task');
     const textTask = taskElement.querySelector('p');
 
     if(e.target.closest('.todo__del')){ 
         const taskId = taskElement.id;
         deleteData(taskId);
+        locked();
     }
 
     if (e.target.closest('.todo__edit')) {
@@ -140,6 +149,7 @@ tasks.addEventListener('click', (e) => {
             textTask.innerHTML = newText;
             taskElement.classList.remove('edit');
             updateText(taskElement.id, newText);
+            locked();
         }
     }
 
@@ -166,6 +176,7 @@ tasks.addEventListener('click', (e) => {
 });
 
 document.addEventListener('change', (e) => {
+    if(isLocked) return;
     const taskElement = e.target.closest('.todo__task');
     const checkbox = e.target.closest('.todo__custom-checkbox');
 
@@ -180,6 +191,7 @@ document.addEventListener('change', (e) => {
         }
         
         patchData(taskId, check);
+        locked();
     }
 })
 
@@ -267,5 +279,12 @@ function checkAni(taskElement, checked) {
             duration: 0.3,
         });
     }
+}
+
+function locked() {
+    isLocked = true,
+    setTimeout(() => {
+        isLocked = false;
+    }, 1000);
 }
 
